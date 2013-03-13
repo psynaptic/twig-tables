@@ -1,3 +1,0 @@
-name = Twig tables
-description = Generates tables for developing the Twig table template.
-core = 8.x
