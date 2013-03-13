@@ -8,6 +8,8 @@
  * Implements hook_menu().
  */
 function twig_tables_menu() {
+  $items = array();
+
   $items['twig-tables'] = array(
     'title' => 'Twig tables',
     'page callback' => 'twig_tables_page',
@@ -22,26 +24,17 @@ function twig_tables_page() {
   $table1 = array(
     'rows' => array(
       array(
-        array(
-          'data' => t('Foo'),
-          'header' => TRUE,
-        ),
+        array('data' => t('Foo'), 'header' => TRUE),
         t('Bar'),
         t('Baz'),
       ),
       array(
-        array(
-          'data' => t('Foo'),
-          'header' => TRUE,
-        ),
+        array('data' => t('Foo'), 'header' => TRUE),
         t('Bar'),
         t('Baz'),
       ),
       array(
-        array(
-          'data' => t('Foo'),
-          'header' => TRUE,
-        ),
+        array('data' => t('Foo'), 'header' => TRUE),
         t('Bar'),
         t('Baz'),
       ),
@@ -58,9 +51,7 @@ function twig_tables_page() {
   );
 
   $table2 = array(
-    'header' => array(
-      t('Foo'),
-      t('Bar'),
+    'header' => array(t('Foo'), t('Bar'),
       array(
         'data' => array(
           '#theme' => 'html_tag',
@@ -107,112 +98,16 @@ function twig_tables_page() {
 
   $table3 = array(
     'header' => array(
-      t('Foo'),
-      array('data' => t('Operations'), 'colspan' => '2'),
-    ),
-    'rows' => array(
-      array(
-        t('Bar'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
-      array(
-        t('Baz'),
-        l(t('edit'), 'edit'),
-        l(t('reset'), 'reset'),
-      ),
+      t('Foo'), array('data' => t('Operations'), 'colspan' => '2'),
     ),
   );
+  for ($i = 0; $i <= 20; $i++) {
+    $table3['rows'][] = array(
+      t('Bar'),
+      l(t('edit'), current_path()),
+      l(t('reset'), current_path()),
+    );
+  }
 
   $build['table3'] = array(
     '#theme' => 'table',
@@ -234,7 +129,6 @@ function twig_tables_page() {
   $query->fields('t');
   $result = $query->orderByHeader($table4['header'])->execute();
 
-  $table4['rows'] = array();
   foreach ($result as $row) {
     $table4['rows'][] = array('data' => (array) $row);
   }
